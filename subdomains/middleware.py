@@ -8,13 +8,20 @@ from django.utils.cache import patch_vary_headers
 from subdomains.utils import get_domain
 
 
+try:
+     from django.utils.deprecation import MiddlewareMixin
+except ImportError:
+     # Not required for Django <= 1.9, see:
+     # https://docs.djangoproject.com/en/1.10/topics/http/middleware/#upgrading-pre-django-1-10-style-middleware
+     MiddlewareMixin = object
+
 logger = logging.getLogger(__name__)
 lower = operator.methodcaller('lower')
 
 UNSET = object()
 
 
-class SubdomainMiddleware(object):
+class SubdomainMiddleware(MiddlewareMixin):
     """
     A middleware class that adds a ``subdomain`` attribute to the current request.
     """

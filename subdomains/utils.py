@@ -9,8 +9,11 @@ from django.core.urlresolvers import reverse as simple_reverse
 
 
 def current_site_domain():
-    from django.contrib.sites.models import Site
-    domain = Site.objects.get_current().domain
+    if getattr(settings, 'SITE_BASE_DOMAIN', False):
+        domain = getattr(settings, 'SITE_BASE_DOMAIN', False)
+    else:
+        from django.contrib.sites.models import Site
+        domain = Site.objects.get_current().domain
 
     prefix = 'www.'
     if getattr(settings, 'REMOVE_WWW_FROM_DOMAIN', False) \
