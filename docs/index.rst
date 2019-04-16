@@ -50,7 +50,7 @@ Example Configuration
     # contain the correct domain.
     # If you're planning on using wildcard subdomains, this should correspond
     # to the urlconf that will be used for the wildcard subdomain. For example,
-    # 'accountname.mysite.com' will load the ROOT_URLCONF, since it is not 
+    # 'accountname.mysite.com' will load the ROOT_URLCONF, since it is not
     # defined in ``SUBDOMAIN_URLCONFS``.
     ROOT_URLCONF = 'myproject.urls.account'
 
@@ -82,7 +82,7 @@ Resolving Named URLs by Subdomain
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Included is a :func:`subdomains.utils.reverse` function that responds similarly to
-:func:`django.core.urlresolvers.reverse`, but accepts optional ``subdomain``
+:func:`django.url.reverse`, but accepts optional ``subdomain``
 and ``scheme`` arguments and does not allow a ``urlconf`` parameter.
 
 If no ``subdomain`` argument is provided, the URL will be resolved relative to
@@ -109,7 +109,7 @@ the ``ROOT_URLCONF``::
     >>> reverse('login', subdomain='wildcard')
     'http://wildcard.example.com/login/'
 
-If a URL cannot be resolved, a :exc:`django.core.urlresolvers.NoReverseMatch`
+If a URL cannot be resolved, a :exc:`django.url.NoReverseMatch`
 will be raised.
 
 Resolving Named URLs in Templates
@@ -153,4 +153,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
